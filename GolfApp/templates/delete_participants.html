@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>参加者削除</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <h1>参加者削除</h1>
+    <form action="{% url 'delete_participants' %}" method="post">
+        {% csrf_token %}
+        {% for participant in participants %}
+        <div>
+            <input type="checkbox" id="delete_participant{{ participant.id }}" name="delete_participants[]" value="{{ participant.id }}">
+            <label for="delete_participant{{ participant.id }}">{{ participant.name }}</label>
+        </div>
+        {% endfor %}
+        <button type="submit">選択した参加者を削除</button>
+    </form>
+    <a href="{% url 'index' %}">戻る</a>
+</body>
+</html>

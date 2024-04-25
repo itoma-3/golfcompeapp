@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>参加者登録</title>
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+        $(document).ready(function(){
+          // 住所検索ボタンのクリックイベントを設定
+          $('#address-search').on('click', function() {
+            var postalCode = $('#id_postal_code').val().replace('-', ''); // ハイフンを除去
+            if(postalCode.length === 7){
+                $.ajax({
+                url: "https://api.zipaddress.net/?zipcode=" + postalCode,
+                dataType: 'jsonp',
+                success: function(data) {
+                    // 成功時の処理を修正
+                    // data.code === 200 のチェックを削除
+                    $('#id_prefecture').val(data.pref);
+                    $('#id_city').val(data.city);
+                    $('#id_address').val(data.town);
+                    // デバッグ用：成功したレスポンスの内容をコンソールに出力
+                    console.log("成功したレスポンス:", data);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    // エラー時の処理
+                    console.log("リクエスト失敗:", textStatus, errorThrown);
+                }
+            });
+            }
+            return false; // フォーム送信を防ぐ
+          });
+        });
+        </script>
+    </head>
+    <body>
+    <h1>参加者登録</h1>
+    <form method="post">
+        {% csrf_token %}
+        <!-- 名前 -->
+        <p>
+            <label for="id_name">名前:</label>
+            {{ form.name }}
+        </p>
+        <!-- 氏名カナ -->
+        <p>
+            <label for="id_kana_name">氏名カナ:</label>
+            {{ form.kana_name }}
+        </p>
+
+        <p>
+            <label for="id_postal_code">郵便番号:</label>
+            {{ form.postal_code }}
+            <button id="address-search" type="button">住所検索</button> <!-- 住所検索ボタンを追加 -->
+        </p>
+        <!-- 都道府県 -->
+        <p>
+            <label for="id_prefecture">都道府県:</label>
+            {{ form.prefecture }}
+        </p>
+        <!-- 市区町村 -->
+        <p>
+            <label for="id_city">市区町村:</label>
+            {{ form.city }}
+        </p>
+        <!-- 番地 -->
+        <p>
+            <label for="id_address">それ以降の住所:</label>
+            {{ form.address }}
+        </p>
+        <!-- 建物名 -->
+        <p>
+            <label for="id_building">建物名:</label>
+            {{ form.building }}
+        </p>
+        <!-- スコア -->
+        <p>
+            <label for="id_average_score">平均スコア:</label>
+            {{ form.average_score }}
+        </p>
+        <!-- 性別 -->
+        <p>
+            <label for="id_gender">性別:</label>
+            {{ form.gender }}
+        </p>
+        <!-- メールアドレス -->
+        <p>
+            <label for="id_email">メールアドレス:</label>
+            {{ form.email }}
+        </p>
+        <!-- 移動手段 -->
+        <p>
+            <label for="id_transportation">移動手段:</label>
+            {{ form.transportation }}
+        </p>
+        <button type="submit">登録</button>
+    </form>
+</body>
+</html>

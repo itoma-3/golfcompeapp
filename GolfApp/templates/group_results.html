@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>グループ分け結果</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <h1>グループ分け結果</h1>
+    {% for group, sorted_participants in groups_with_sorted_participants %}
+        <h2>グループ {{ forloop.counter }}</h2>
+        <ul>
+        {% for participant in sorted_participants %}
+            <!-- 最小スコアの参加者の名前の前に⛳️マークをつける -->
+            <li>{% if forloop.first %}⛳️{% endif %}{{ participant.name }} - 平均スコア: {{ participant.average_score }}</li>
+        {% endfor %}
+        </ul>
+    {% endfor %}
+    <a href="{% url 'index' %}">戻る</a>
+</body>
+</html>

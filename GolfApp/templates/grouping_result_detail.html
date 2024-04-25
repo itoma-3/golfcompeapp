@@ -1,0 +1,23 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>組分け結果の詳細</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <h1>組分け結果の詳細</h1>
+    <h2>結果作成日時: {{ result.created_at|date:"Y年m月d日 H:i" }}</h2>
+    {% for group in groups %}
+        <h3>グループ {{ forloop.counter }}</h3>
+        <ul>
+            {% for participant in group.participants.all %}
+                <li>{{ participant.name }}</li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+    <a href="{% url 'result_list' %}">結果の一覧に戻る</a>
+</body>
+</html>

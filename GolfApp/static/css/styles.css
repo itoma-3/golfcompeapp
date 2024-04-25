@@ -1,0 +1,108 @@
+/* チェックボックスのサイズを調整 */
+input[type="checkbox"] {
+    width: 20px; /* チェックボックスの幅 */
+    height: 20px; /* チェックボックスの高さ */
+    cursor: pointer; /* カーソルをポインタに */
+}
+
+/* アイコン（絵文字）のサイズを大きくするためのクラス */
+.large-icon {
+    font-size: 24px; /* アイコンのサイズ */
+}
+
+/* 追加された行のスタイルを調整 */
+.participant-row-icon {
+    display: flex;
+    align-items: center; /* アイコンとテキストを中央揃え */
+    justify-content: center; /* 中央揃え */
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #336633;
+}
+
+.error {
+    color: red;
+}
+
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.participant-name {
+    font-size: 24px; /* 例として24pxに設定。必要に応じて調整してください */
+}
+button, .btn {
+    background-color: #446644;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+button:hover, .btn:hover {
+    background-color: #558855;
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+label {
+    margin-right: 20px;
+}
+
+a {
+    color: #446644;
+}
+
+a:hover {
+    color: #558855;
+}
+
+.messages {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.messages p {
+    margin: 0;
+}
+
+/* メディアクエリを追加して、異なる画面サイズに対応 */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .participant-name, .large-icon {
+        font-size: 18px; /* 小さい画面ではフォントサイズを小さくする */
+    }
+
+    form {
+        padding: 10px;
+        box-shadow: none;
+    }
+
+    button, .btn {
+        padding: 8px 16px;
+    }
+
+    .participant-row-icon {
+        flex-direction: column; /* 小さい画面ではアイテムを縦に並べる */
+    }
+}
