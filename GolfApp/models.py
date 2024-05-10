@@ -5,12 +5,12 @@ class Participant(models.Model):
     kana_name = models.CharField(max_length=100, verbose_name='氏名カナ',default='')  # 氏名カナを追加
     average_score = models.IntegerField(default=0)  # FloatFieldからIntegerFieldに変更
     gender = models.CharField(max_length=1, choices=(('M', '男'), ('F', '女')))
-    email = models.EmailField(max_length=254, verbose_name='メールアドレス', default='')
-    transportation = models.CharField(max_length=2, choices=(('Y', 'あり'), ('N', 'なし')), verbose_name='移動手段',default='N')  # 移動手段を追加
-    postal_code = models.CharField(max_length=8, verbose_name='郵便番号', default='')  # 郵便番号
-    prefecture = models.CharField(max_length=100, verbose_name='都道府県', default='')  # 都道府県
-    city = models.CharField(max_length=100, verbose_name='市区町村', default='')  # 市区町村
-    address = models.CharField(max_length=255, verbose_name='番地', default='')  # 番地
+    email = models.EmailField(max_length=254, verbose_name='メールアドレス', default='',blank=True)
+    transportation = models.CharField(max_length=2, choices=(('Y', 'あり'), ('N', 'なし')), verbose_name='移動手段',default='N',blank=True)  # 移動手段を追加
+    postal_code = models.CharField(max_length=8, verbose_name='郵便番号', default='',blank=True)  # 郵便番号
+    prefecture = models.CharField(max_length=100, verbose_name='都道府県', default='',blank=True)  # 都道府県
+    city = models.CharField(max_length=100, verbose_name='市区町村', default='',blank=True)  # 市区町村
+    address = models.CharField(max_length=255, verbose_name='番地', default='',blank=True)  # 番地
     building = models.CharField(max_length=255, verbose_name='建物名', default='', blank=True)  # 建物名（任意）
 
     def __str__(self):
